@@ -75,27 +75,51 @@ class Chips:
         self.total-self.bet
 
 
-def take_bet():
-    bet = int(input('Please enter the bet you want to make : '))
+def take_bet(player_chips):
+    while True:
+        bet = int(input('Please enter the bet you want to make : '))
+        if bet>player_chips.total:
+            print('That is more than the total Chips you have ')
+            continue
+        else:
+            break
 
 
-def show_some(player_hand):
-        for card in player_hand.cards:
-            print(str(card))
+def show_some(player_hand,dealer_hand):
+        print('Dealer \'s hand: ')
+        print(" <card hidden>")
+        print('',dealer_hand.cards[1])  
+        print("\nPlayer's Hand:", *player_hand.cards, sep='\n ')
+        print(f'Player\'s Current hand value : {player_hand.value}')
+
+
+def show_all(player_hand,dealer_hand):
+    print('Dealer \'s hand: ')
+    print(' ',*dealer_hand.cards, sep='\n ')
+    print("\nPlayer's Hand:", *player_hand.cards, sep='\n ')
 
 
 
+
+
+################ Game starts now ###########################
 deck1 = Deck()
 deck1.shuffle()
-#print(deck1)
-player_card1 = deck1.deal()
-player_card2 = deck1.deal()
-#card1 = Cards('hearts','Ace')
+player_chips = Chips()
 player_hand = Hand()
-player_hand.add_card(player_card1)
-player_hand.add_card(player_card2)
+dealer_hand = Hand()
 
-show_some(player_hand)
+
+player_hand.add_card(deck1.deal())
+player_hand.add_card(deck1.deal())
+dealer_hand.add_card(deck1.deal())
+dealer_hand.add_card(deck1.deal())
+
+show_some(player_hand,dealer_hand)
+#show_all(player_hand,dealer_hand)
+
+take_bet(player_chips)
+
 
 
 
