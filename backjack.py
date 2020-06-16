@@ -30,6 +30,12 @@ class Deck:
         return str(string_deck)
         #return str(value[self.deck[1].rank])
 
+    def shuffle(self):
+        random.shuffle(self.deck) 
+
+    def deal(self):
+        return (self.deck.pop())
+
 class Hand:
     def __init__(self):
         self.cards = []  # start with an empty list as we did in the Deck class
@@ -42,8 +48,9 @@ class Hand:
             self.adjust_for_ace()
         else:
             self.value = self.value + value[card.rank]
-        print(f'Your hand is now worth the value of {self.value}')
+        #print(f'Your hand is now worth the value of {self.value}')
 
+    
     
     def adjust_for_ace(self):
         while True:
@@ -54,11 +61,6 @@ class Hand:
             else:
                 print('Please enter a valid number')
                 continue 
-
-    def shuffle(self):
-        random.shuffle(self.deck) 
-
-
 
 class Chips:
     
@@ -77,16 +79,23 @@ def take_bet():
     bet = int(input('Please enter the bet you want to make : '))
 
 
-    
+def show_some(player_hand):
+        for card in player_hand.cards:
+            print(str(card))
 
 
 
-#deck1 = Deck()
+deck1 = Deck()
+deck1.shuffle()
 #print(deck1)
+player_card1 = deck1.deal()
+player_card2 = deck1.deal()
+#card1 = Cards('hearts','Ace')
+player_hand = Hand()
+player_hand.add_card(player_card1)
+player_hand.add_card(player_card2)
 
-card1 = Cards('hearts','Ace')
-hand1 = Hand()
-hand1.add_card(card1)
+show_some(player_hand)
 
 
-clear = lambda: os.system('clear')
+
