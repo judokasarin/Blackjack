@@ -97,12 +97,36 @@ def show_all(player_hand,dealer_hand):
     print('Dealer \'s hand: ')
     print(' ',*dealer_hand.cards, sep='\n ')
     print("\nPlayer's Hand:", *player_hand.cards, sep='\n ')
+    print(f'Player\'s Current hand value : {player_hand.value}')
+
+
+def hit(deck,hand,d):
+   hand.add_card(deck.deal())
+   d.add_card(deck.deal())
+   show_all(hand,d)
+
+
+
+def hit_or_stand(deck,hand,d):
+    while True:
+        x = input('Do you want to hit or stand h/s : ')
+        if x[0] == 'h' or x[0] == 's':
+            if x[0] == 'h':
+                hit(deck,hand,d)
+                continue
+            else:
+                break
+        else:
+            print('Opps you entered something wrong')
+            continue
+
 
 
 
 
 
 ################ Game starts now ###########################
+print('Welcome To  Text Backjack Aplha-1')
 deck1 = Deck()
 deck1.shuffle()
 player_chips = Chips()
@@ -119,6 +143,7 @@ show_some(player_hand,dealer_hand)
 #show_all(player_hand,dealer_hand)
 
 take_bet(player_chips)
+hit_or_stand(deck1,player_hand,dealer_hand)
 
 
 
